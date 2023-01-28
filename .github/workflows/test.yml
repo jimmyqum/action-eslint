@@ -16,8 +16,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install scraper dependencies
-      working-directory: ./github
       run: npm ci
     - name: Run linting in scraper
-      working-directory: ./testdata
+      working-directory: testdata
       run: npm run lint
