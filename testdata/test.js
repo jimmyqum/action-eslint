@@ -17,3 +17,5 @@ function f()
 {
   console.log('🐶');
 }
+fsdfasdfa.asdfasdf
+asdf.asdfasdf
