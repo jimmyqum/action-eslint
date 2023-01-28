@@ -22,6 +22,6 @@ jobs:
       - run: npm ci
       - run: npm ls --depth=0
 
-      - uses: ./testdata
+      - uses: ./
         with:
           extensions: 'js,ts'
