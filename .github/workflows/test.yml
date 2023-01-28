@@ -1,19 +1,30 @@
-name: reviewdog
+name: ESLint
+
 on:
-  pull_request:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "master" ]
+
 jobs:
   eslint:
-    name: runner / eslint
+    name: Run eslint scanning
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write 
+      security-events: write
     steps:
-      - uses: actions/checkout@v2
-      - uses: reviewdog/action-eslint@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review # Change reporter.
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install ESLint
+        run: |
+          npm install eslint@8.10.0
+          npm install @microsoft/eslint-formatter-sarif@2.1.7
+
+      - name: Run ESLint
+        run: npx eslint .
+          --config .eslintrc.json
+          --ext .js,.jsx,.ts,.tsx
+        continue-on-error: false
